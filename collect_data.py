@@ -5,7 +5,7 @@ import schedule
 import time
 
 QUERY = '''query { assets {name symbol statistic{liquidity shortValue volume apr{long short} marketCap collateralValue minCollateralRatio}}}'''
-BASE_URL = "https://tequila-graph.mirror.finance/graphql"
+BASE_URL = "https://graph.mirror.finance/graphql"
 
 def req_data():
 

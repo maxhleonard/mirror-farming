@@ -11,7 +11,10 @@ def req_data():
 
 	now = int(datetime.datetime.today().timestamp())
 	data_df = pd.DataFrame()
-	data = requests.post(BASE_URL, json={"query":QUERY}).json()["data"]["assets"]
+	try:
+		data = requests.post(BASE_URL, json={"query":QUERY}).json()["data"]["assets"]
+	except:
+		return
 	for asset in data:
 		try:
 			data_df = data_df.append({"name":asset["name"], "symbol":asset["symbol"],"timestamp":now,"price":asset["prices"]["price"], "oraclePrice":asset["prices"]["oraclePrice"], "liquidity":asset["statistic"]["liquidity"], "shortValue":asset["statistic"]["shortValue"], "volume":asset["statistic"]["volume"], "apr_long":asset["statistic"]["apr"]["long"], "apr_short":asset["statistic"]["apr"]["short"], "marketCap":asset["statistic"]["marketCap"], "collateralValue":asset["statistic"]["collateralValue"], "minCollateralRatio":asset["statistic"]["minCollateralRatio"]}, ignore_index=True)
